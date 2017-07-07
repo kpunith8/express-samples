@@ -7,6 +7,16 @@ var app = express();
 app.set('view engine', 'pug');
 app.set('views', './views');
 
+// for parsing application/json
+app.use(bodyParser.json()); 
+
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+// for parsing multipart/form-data
+app.use(upload.array()); 
+app.use(express.static('public'));
+
 // var things = require('./things.js');
 
 //Sample get and reading input
@@ -120,6 +130,7 @@ app.post('/person', function(req, res){
    var personInfo = req.body; //Get the parsed information
    
    if(!personInfo.name || !personInfo.age || !personInfo.nationality){
+
       res.render('show_message', {
          message: "Sorry, you provided worng info", type: "error"});
    } else {
@@ -137,6 +148,10 @@ app.post('/person', function(req, res){
                message: "New person added", type: "success", person: personInfo});
       });
    }
+});
+
+Person.find(function(err, response){
+   console.log(response);
 });
 
 app.listen(3000);
