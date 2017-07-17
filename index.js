@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var upload = multer();
 var app = express();
+var router = express.Router();
 
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -15,6 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // for parsing multipart/form-data
 app.use(upload.array()); 
+
+// To load static data 
 app.use(express.static('public'));
 
 // var things = require('./things.js');
@@ -150,8 +153,24 @@ app.post('/person', function(req, res){
    }
 });
 
-Person.find(function(err, response){
-   console.log(response);
-});
+
+// Person.find(function(err, response){
+//    console.log(response);
+// });
+
+app.get('/user/:id', function (req, res, next) {
+  // if the user ID is 0, skip to the next route
+  if (req.params.id === '0') next('route');
+  // otherwise pass the control to the next middleware function in this stack
+  else next();
+}, function (req, res, next) {
+  // render a regular page
+  res.send('regular');
+})
+
+// handler for the /user/:id path, which renders a special page
+app.get('/user/:id', function (req, res, next) {
+  res.send('special')
+})
 
 app.listen(3000);
