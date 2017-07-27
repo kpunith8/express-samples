@@ -1,12 +1,14 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var upload = multer();
-var open = require('open');
-var app = express();
-var router = express.Router();
+import express from 'express';
+import bodyParser from 'body-parser';
+import multer from 'multer';
+import open from 'open';
 
-var port = 3000;
+const upload = multer();
+const app = express();
+const router = express.Router();
+
+const port = 3000;
+
 app.set('view engine', 'pug');
 app.set('views', './views');
 
@@ -184,6 +186,6 @@ app.listen(port, function(err) {
     if(err) {
         console.log(err);
     } else {
-        open('http://localhost:' + port);
+        //open('http://localhost:' + port);
     }
 });
