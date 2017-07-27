@@ -132,6 +132,7 @@ app.post('/', function(req, res){
 
 // MongoDB
 
+/*
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/my_db');
 
@@ -170,7 +171,7 @@ app.post('/person', function(req, res){
       });
    }
 });
-
+*/
 
 // Person.find(function(err, response){
 //    console.log(response);

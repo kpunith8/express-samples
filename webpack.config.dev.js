@@ -1,21 +1,21 @@
 import path from 'path';
 
-export default {
-  devtool: 'inline-source-map',
-  entry: [
-    path.resolve(__dirname, 'src/new-index')
-  ],
-  target: 'web',
-  output: {
-    path: path.resolve(__dirname, 'src'),
-    publicPath: '/',
-    filename: 'bundle.js'
-  },
-  plugins: []
-//   module: {
-//     loaders: [
-//     //   {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
-//     //   {test: /\.css$/, loaders: ['style','css']}
-//     ]
-//   }
+  module.exports = {
+    entry: './src/new-index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'src')
+    },
+
+   module: {
+     rules: [
+       {
+         test: /\.css$/,
+         use: [
+           'style-loader',
+           'css-loader'
+         ]
+       }
+     ]
+   }
 }
