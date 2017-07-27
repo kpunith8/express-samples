@@ -2,9 +2,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var upload = multer();
+var open = require('open');
 var app = express();
 var router = express.Router();
 
+var port = 3000;
 app.set('view engine', 'pug');
 app.set('views', './views');
 
@@ -19,6 +21,11 @@ app.use(upload.array());
 
 // To load static data 
 app.use(express.static('public'));
+
+
+app.get('/', function(req, res){
+   res.render('form');
+});
 
 // var things = require('./things.js');
 
@@ -173,4 +180,10 @@ app.get('/user/:id', function (req, res, next) {
   res.send('special')
 })
 
-app.listen(3000);
+app.listen(port, function(err) {
+    if(err) {
+        console.log(err);
+    } else {
+        open('http://localhost:' + port);
+    }
+});
