@@ -2,10 +2,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import multer from 'multer';
 import open from 'open';
+import webpack from 'webpack';
+import config from './webpack.config.dev';
+import path from 'path';
 
 const upload = multer();
 const app = express();
 const router = express.Router();
+const compiler = webpack(config);
 
 const port = 3000;
 
@@ -24,9 +28,14 @@ app.use(upload.array());
 // To load static data 
 app.use(express.static('public'));
 
+// Required to run webpack in express
+app.use(require('webpack-dev-middleware')(compiler, {
+    publicPath: config.output.publicPath
+}));
 
 app.get('/', function(req, res){
-   res.render('form');
+   res.sendFile(path.join(__dirname, 'src/index.html'));
+    //res.render('form');
 });
 
 // var things = require('./things.js');
