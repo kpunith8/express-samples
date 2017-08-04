@@ -13,7 +13,7 @@ describe('index.html', () => {
     it('should say hello', (done) => {
         const index = fs.readFileSync('./src/index.html', 'utf-8'); // Loading the files
 
-        jsdom.env(index, function(err, window) { // can specify array of JavaScript files if required of index.html
+        jsdom.env(index, function(err, window) { // can specify array of JavaScript files if required by index.html
             const h1 = window.document.getElementsByTagName('h2')[0];
 
             expect(h1.innerHTML).to.equal('Hello Node');

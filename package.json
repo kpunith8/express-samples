@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "prestart": "babel-node ./startMessage.js",
-    "start": "npm-run-all --parallel security-check open-source lint:watch",
+    "start": "npm-run-all --parallel open-source lint:watch test:watch",
     "lint": "esw webpack.config.* src --color",
     "lint:watch": "npm run lint -- --watch",
     "open-source": "babel-node ./index.js",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000 --subdomain punith",
     "share": "npm-run-all --parallel open-source localtunnel",
-    "test": "mocha --reporter progress src/testSetup.js \"src/**/*.test.js\""
+    "test": "mocha --reporter progress src/testSetup.js \"src/**/*.test.js\"",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
