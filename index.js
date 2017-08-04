@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import multer from 'multer';
 import open from 'open';
 import webpack from 'webpack';
-import config from './webpack.config.dev';
+import config from './webpack.config';
 import path from 'path';
 
 const upload = multer();
