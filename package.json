@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prestart": "babel-node ./startMessage.js",
-    "start": "npm-run-all --parallel open-source lint:watch test:watch",
+    "start": "npm-run-all --parallel open-source lint:watch test:watch start-mockapi",
     "lint": "esw webpack.config.* src --color",
     "lint:watch": "npm run lint -- --watch",
     "open-source": "babel-node ./index.js",
@@ -13,7 +13,10 @@
     "localtunnel": "lt --port 3000 --subdomain punith",
     "share": "npm-run-all --parallel open-source localtunnel",
     "test": "mocha --reporter progress src/testSetup.js \"src/**/*.test.js\"",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "generate-mock-data": "babel-node ./generateMockData",
+    "prestart-mockapi": "npm run generate-mock-data",
+    "start-mockapi": "json-server --watch src/api/db.json --port 3001"
   },
   "repository": {
     "type": "git",
@@ -43,7 +46,8 @@
     "nsp": "^2.7.0",
     "pug": "^2.0.0-rc.2",
     "webpack": "^3.4.1",
-    "webpack-dev-middleware": "^1.11.0"
+    "webpack-dev-middleware": "^1.11.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -57,6 +61,9 @@
     "cross-env": "^5.0.3",
     "css-loader": "^0.28.4",
     "jsdom": "^9.8.0",
+    "json-schema-faker": "^0.3.6",
+    "json-server": "^0.8.22",
+    "nock": "^8.1.0",
     "numeral": "^2.0.6",
     "open": "0.0.5",
     "path": "^0.12.7",

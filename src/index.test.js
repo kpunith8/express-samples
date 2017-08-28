@@ -10,13 +10,13 @@ describe('Sample test', () => {
 
 // jsdom@9.8.0 
 describe('index.html', () => {
-    it('should say hello', (done) => {
+    it('should say Users', (done) => {
         const index = fs.readFileSync('./src/index.html', 'utf-8'); // Loading the files
 
         jsdom.env(index, function(err, window) { // can specify array of JavaScript files if required by index.html
-            const h1 = window.document.getElementsByTagName('h2')[0];
+            const h2 = window.document.getElementsByTagName('h2')[0];
 
-            expect(h1.innerHTML).to.equal('Hello Node');
+            expect(h2.innerHTML).to.equal('Users');
             done();
             window.close();
         });
